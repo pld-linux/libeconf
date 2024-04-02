@@ -3,6 +3,7 @@
 %bcond_without	apidocs		# API documentation
 %bcond_without	python		# Python (3.x) binding
 %bcond_without	static_libs	# static libraries
+%bcond_without	tests
 #
 Summary:	Highly flexible library to manage key=value configuration files
 Summary(pl.UTF-8):	Elastyczna biblioteka do zarządzania plikami konfiguracyjnymi klucz=wartość
@@ -102,6 +103,11 @@ EOF
 %if %{with python}
 cd bindings/python3
 %py3_build
+cd ../..
+%endif
+
+%if %{with tests}
+%ninja_test -C build
 %endif
 
 %install
