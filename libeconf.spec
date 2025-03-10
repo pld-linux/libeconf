@@ -9,7 +9,7 @@ Summary:	Highly flexible library to manage key=value configuration files
 Summary(pl.UTF-8):	Elastyczna biblioteka do zarządzania plikami konfiguracyjnymi klucz=wartość
 Name:		libeconf
 Version:	0.6.2
-Release:	1
+Release:	2
 License:	MIT
 Group:		Libraries
 Source0:	https://github.com/openSUSE/libeconf/archive/v%{version}/%{name}-%{version}.tar.gz
