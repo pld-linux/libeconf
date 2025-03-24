@@ -9,7 +9,7 @@ Summary:	Highly flexible library to manage key=value configuration files
 Summary(pl.UTF-8):	Elastyczna biblioteka do zarządzania plikami konfiguracyjnymi klucz=wartość
 Name:		libeconf
 Version:	0.6.2
-Release:	3
+Release:	4
 License:	MIT
 Group:		Libraries
 Source0:	https://github.com/openSUSE/libeconf/archive/v%{version}/%{name}-%{version}.tar.gz
@@ -96,9 +96,9 @@ setup()
 EOF
 
 %build
-%meson build
+%meson
 
-%ninja_build -C build
+%meson_build
 
 %if %{with python}
 cd bindings/python3
@@ -107,13 +107,13 @@ cd ../..
 %endif
 
 %if %{with tests}
-%ninja_test -C build
+%meson_test
 %endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%ninja_install -C build
+%meson_install
 
 %if %{with python}
 cd bindings/python3
