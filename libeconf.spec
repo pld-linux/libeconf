@@ -19,10 +19,13 @@ BuildRequires:	doxygen
 BuildRequires:	meson >= 0.49
 BuildRequires:	ninja >= 1.5
 BuildRequires:	rpm-build >= 4.6
-BuildRequires:	rpmbuild(macros) >= 2.042
+BuildRequires:	rpmbuild(macros) >= 2.044
 %if %{with python}
+BuildRequires:	python3-build
+BuildRequires:	python3-installer
 BuildRequires:	python3-modules >= 1:3.2
 BuildRequires:	python3-setuptools >= 1:61
+BuildRequires:	python3-wheel
 BuildRequires:	rpm-pythonprov
 %endif
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -91,11 +94,6 @@ Wiązania Pythona 3 do libeconf.
 %prep
 %setup -q
 
-cat >bindings/python3/setup.py <<EOF
-from setuptools import setup
-setup()
-EOF
-
 %build
 %meson \
 	%{!?with_static_libs:--default-library=shared}
@@ -104,7 +102,7 @@ EOF
 
 %if %{with python}
 cd bindings/python3
-%py3_build
+%py3_build_pyproject
 cd ../..
 %endif
 
@@ -119,7 +117,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %if %{with python}
 cd bindings/python3
-%py3_install
+%py3_install_pyproject
 
 cp -p docs/python-libeconf.3 $RPM_BUILD_ROOT%{_mandir}/man3
 %endif
@@ -163,6 +161,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{py3_sitescriptdir}/econf.py
 %{py3_sitescriptdir}/__pycache__/econf.cpython-*.py[co]
-%{py3_sitescriptdir}/python_libeconf-0.6.0-py*.egg-info
+%{py3_sitescriptdir}/python_libeconf-%{version}.dist-info
 %{_mandir}/man3/python-libeconf.3*
 %endif
