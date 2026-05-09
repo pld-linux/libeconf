@@ -23,6 +23,7 @@ BuildRequires:	rpmbuild(macros) >= 2.042
 %if %{with python}
 BuildRequires:	python3-modules >= 1:3.2
 BuildRequires:	python3-setuptools >= 1:61
+BuildRequires:	rpm-pythonprov
 %endif
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
