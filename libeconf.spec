@@ -96,7 +96,8 @@ setup()
 EOF
 
 %build
-%meson
+%meson \
+	%{!?with_static_libs:--default-library=shared}
 
 %meson_build
 
